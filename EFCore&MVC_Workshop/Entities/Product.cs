@@ -6,6 +6,9 @@
         public string ProductName { get; set; }
         public decimal ProductPrice { get; set; }
         public decimal ProductStock { get; set; }
-       
+        public int CategoryId { get; set; }//her ürünün bir kategorisi olmak zorunda
+        public Category Category { get; set; }
+        public List<Order> Orders { get; set; }
+
     }
 }

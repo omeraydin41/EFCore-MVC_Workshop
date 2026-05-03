@@ -16,6 +16,8 @@ namespace EFCore_MVC_Workshop.Context
         public DbSet<Category> Categories { get; set; }//Categories tablo adımız oldu db de 
         public DbSet<Product> Products { get; set; }//Products tablo adımız  oldu db de 
         public DbSet<Customer> Customers { get; set; }//Customers tablo adımız  oldu db de
+        
+        public DbSet<Order> Orders { get; set; }
 
         //order sonra eklenecek 
     }

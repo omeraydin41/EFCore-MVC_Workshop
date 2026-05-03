@@ -9,5 +9,6 @@
         public string? CustomerDistrict { get; set; }//ilçe / null olabılır
         public decimal Balance { get; set; }//bakiye
         public string? CustomerImageUrl { get; set; }//bakiye
+        public List<Order> Orders { get; set; }
     }
 }
