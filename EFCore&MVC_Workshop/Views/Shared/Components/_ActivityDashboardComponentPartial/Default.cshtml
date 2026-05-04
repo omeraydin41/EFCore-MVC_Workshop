@@ -1,0 +1,40 @@
+﻿@* bır sayfada lısteleme yapılabılmesi için sayfanın en usutun emodel tanımlanır ve lıste verilir ve içine listelenecek olan entitiy yazılır 
+    _ViewImports.cshtml klasoru içine @using EFCore_MVC_Workshop.Entities eklendikten sonra 
+*@
+
+@model List<Activity>
+
+<div class="col-md-4 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">
+                <i class="far fa-futbol"></i>
+                Aktivitiler
+            </h4>
+            <ul class="solid-bullet-list">
+
+                @foreach(var item in Model)
+                {
+                    <li>
+                        <h5>
+                            @item.Title <!--Title listelenıcek class olan ACTİVİTY clasının entitiysi-->
+                            <span class="float-right text-muted font-weight-normal small">@item.ActivityTime</span>
+                        </h5>
+                        <p class="text-muted">@item.Description</p>
+                    </li>
+                }
+
+               
+            </ul>
+            <div class="border-top pt-3">
+                <div class="d-flex justify-content-between">
+                    <button class="btn btn-outline-dark">Daha Fazlası</button>
+                    <button class="btn btn-primary btn-icon-text">
+                        Yeni Aktivite Girişi
+                        <i class="btn-icon-append fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

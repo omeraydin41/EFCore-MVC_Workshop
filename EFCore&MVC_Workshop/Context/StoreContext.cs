@@ -18,6 +18,7 @@ namespace EFCore_MVC_Workshop.Context
         public DbSet<Customer> Customers { get; set; }//Customers tablo adımız  oldu db de
         
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Activity> Activities { get; set; }
 
         //order sonra eklenecek 
     }
