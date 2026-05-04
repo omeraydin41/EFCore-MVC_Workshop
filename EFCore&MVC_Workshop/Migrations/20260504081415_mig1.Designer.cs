@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFCore_MVC_Workshop.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20260503204953_mig3")]
-    partial class mig3
+    [Migration("20260504081415_mig1")]
+    partial class mig1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
