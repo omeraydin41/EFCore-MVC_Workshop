@@ -1,7 +1,9 @@
 ﻿
 @*bir sayfada lıste tanımlamak için en üstte model ile beraber kullanıllmalı ve liste olacak tablo adı da verilmeli*@
 @model List<Order>
-
+@{
+    string status ="";
+}
 <div class="col-md-8 grid-margin stretch-card">
     <div class="card">
         <div class="card-body">
@@ -32,14 +34,52 @@
                                 <td>
                                     @item.OrderCount
                                 </td>
-                                <td>
-                                    <label class="badge badge-success badge-pill">@item.Status</label>
-                                </td>
+                                @if (item.Status == "Taşıma Durumunda")
+                                {
+                                    <td>
+                                        <label class="badge badge-warning badge-pill">@item.Status</label>
+                                    </td>
+                                }
+                                @if (item.Status == "İptal Edildi")
+                                {
+                                    <td>
+                                        <label class="badge badge-danger badge-pill">@item.Status</label>
+                                    </td>
+                                }
+                                @if (item.Status == "Teslim Edildi")
+                                {
+                                    <td>
+                                        <label class="badge badge-success badge-pill">@item.Status</label>
+                                    </td>
+                                }
+                                @if (item.Status == "Sipariş Alındı")
+                                {
+                                    <td>
+                                        <label class="badge badge-primary badge-pill">@item.Status</label>
+                                    </td>
+                                }
+                                @if (item.Status == "Ödeme Bekleniyor")
+                                {
+                                    <td>
+                                        <label class="badge badge-info badge-pill">@item.Status</label>
+                                    </td>
+                                }
                             </tr>
                         }
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-4 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">
+                <i class="fas fa-calendar-alt"></i>
+                Takvim
+            </h4>
+            <div id="inline-datepicker-example" class="datepicker"></div>
         </div>
     </div>
 </div>

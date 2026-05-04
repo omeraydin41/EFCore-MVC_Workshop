@@ -19,8 +19,9 @@ namespace EFCore_MVC_Workshop.Context
         
         public DbSet<Order> Orders { get; set; }
         public DbSet<Activity> Activities { get; set; }
+        public DbSet<ToDo> ToDos { get; set; }
 
-        //order sonra eklenecek 
+       
     }
 
 }
