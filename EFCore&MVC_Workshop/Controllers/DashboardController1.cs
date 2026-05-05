@@ -8,5 +8,9 @@ namespace EFCore_MVC_Workshop.Controllers
         {
             return View();
         }
+        public IActionResult Statistics()
+        {
+            return View();
+        }
     }
 }
