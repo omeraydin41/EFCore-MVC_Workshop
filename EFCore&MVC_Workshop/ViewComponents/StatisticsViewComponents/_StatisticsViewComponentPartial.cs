@@ -46,6 +46,15 @@ namespace EFCore_MVC_Workshop.ViewComponents.StatisticsViewComponents
             //ortalama ürün fiyatı 
             ViewBag.averageProductPrice = _context.Products.Average(x=>x.ProductPrice);
 
+            //fiyatı 1000 den büyük olan ürün sayısı
+            ViewBag.biggerPriceThan1000ProductCount=_context.Products.Where(x=>x.ProductPrice>1000).Count();
+
+            //id si 4 olan urunun adı /select ile beraber gelen urun satıtından ıstenılan alan alınır
+            ViewBag.getId4ProductName = _context.Products.Where(x => x.ProductId == 4).Select(x => x.ProductName).FirstOrDefault();
+
+            //stok sayısı >50 <100 olan urun sayısı
+            ViewBag.stockCountbigger50AndSmoller100ProductCount = _context.Products.Where(x=>x.ProductStock>50&&x.ProductStock<100).Count();
+
 
             //where :EF de SORGULAMAK için kullanılan methoddur. Koşula uyan kayıtları filtreler ve döndürür.
             //x=>x. lamda : ilgili methoddan(burda where) once gelen entitiynın içindeki(burda Product) propertylere erişmek için kullanılır.
