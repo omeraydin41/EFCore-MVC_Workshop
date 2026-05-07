@@ -1,6 +1,8 @@
 ﻿using EFCore_MVC_Workshop.Context;
 using EFCore_MVC_Workshop.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFCore_MVC_Workshop.Controllers
 {
@@ -15,7 +17,8 @@ namespace EFCore_MVC_Workshop.Controllers
 
         public IActionResult ProductList()
         {
-            var values=_context.Products.ToList();//product tablosunu liste olarak aldık.
+            var values=_context.Products.Include(x=>x.Category).ToList();//product tablosunu liste olarak aldık.
+            //include ile category tablosunun tum alanlarına joın yaparak ulaştık (kartezyen çarpımı)
             return View(values);
         }
 
@@ -25,8 +28,17 @@ namespace EFCore_MVC_Workshop.Controllers
         [HttpGet]//sayfayı getirecek method 
         public IActionResult CreateProduct()
         {
+            var categories = _context.Categories
+                                     .Select(c => new SelectListItem
+                                     { //burda 2 tane parametre alınmalı //gorulecek değer ve arka planda tutulacak değer
+
+                                       Value=c.CategoryId.ToString(),//arka planda tutulacak değer
+                                       Text=c.CategoryName           //gorulecek değer
+                                     }).ToList();
+            ViewBag.categories = categories;//viewbag ile sayfaya taşıdık
             return View();
         }
+
         [HttpPost]//değişikliği yapacak olan method 
         public IActionResult CreateProduct(Product product)
         {
@@ -52,6 +64,14 @@ namespace EFCore_MVC_Workshop.Controllers
         [HttpGet] //sayfayı getirecek olan method
         public IActionResult UpdateProduct(int id)
         {
+            var categories = _context.Categories
+                                   .Select(c => new SelectListItem
+                                   { //burda 2 tane parametre alınmalı //gorulecek değer ve arka planda tutulacak değer
+
+                                       Value = c.CategoryId.ToString(),//arka planda tutulacak değer
+                                       Text = c.CategoryName           //gorulecek değer
+                                   }).ToList();
+            ViewBag.categories = categories;//viewbag ile sayfaya taşıdık
             var value= _context.Products.Find(id);//güncellenecek olan ürünü id üzerinden bulduk
             return View(value);//güncellenecek olan ürünü sayfaya taşıdık
         }
@@ -62,8 +82,12 @@ namespace EFCore_MVC_Workshop.Controllers
             _context.SaveChanges();
             return RedirectToAction("ProductList");//güncelleme işlemi tamamlandıktan sonra ürün listesine yönlendirme işlemi
         }
-
-
         #endregion
+
+        public IActionResult First5ProductList()
+        {
+            var values = _context.Products.Include(x=>x.Category).Take(5).ToList();//ürün tablosundan ilk 5 ürünü aldık
+            return View(values);
+        }
     }
 }
