@@ -89,5 +89,12 @@ namespace EFCore_MVC_Workshop.Controllers
             var values = _context.Products.Include(x=>x.Category).Take(5).ToList();//ürün tablosundan ilk 5 ürünü aldık
             return View(values);
         }
+
+        public IActionResult Skip4ProductList()
+        {
+            var values = _context.Products.Include(x=>x.Category).Skip(4).Take(10).ToList();
+            //ürün tablosundan ilk 4 ürünü atlayarak sonraki 10 ürünü aldık
+            return View(values);
+        }
     }
 }
