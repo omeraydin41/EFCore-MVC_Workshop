@@ -1,0 +1,42 @@
+﻿
+C# Asenkron Programlama (Async - Await - Task)
+Asenkron programlamanın temel amacı; uzun süren işlemlerde (I/O, veri tabanı sorguları, API istekleri vb.) ana iş parçacığını (UI Thread veya Web Thread) bloke etmeden uygulamanın çalışmaya devam etmesini sağlamaktır. 
+Böylece masaüstü/mobil uygulamalar donmaz, web uygulamaları ise aynı anda çok daha fazla isteğe (request) yanıt verebilir.
+
+Temel Kavramlar
+1. async Anahtar Kelimesi
+ * Bir metodun asenkron çalışacağını belirtir.
+ * Derleyiciye (compiler) bu metodun içinde await kelimesinin kullanılabileceğini söyler.
+ * Tek başına asenkron bir çalışma başlatmaz, sadece bir işaretçidir.
+
+2. await Anahtar Kelimesi
+ * async ile işaretlenmiş metodlar içinde kullanılır.
+ * Uzun süren asenkron işlemin tamamlanmasını bekler.
+ * Sihirli Nokta: Bu bekleme sırasında mevcut thread (iş parçacığı) bloke edilmez; serbest bırakılır ve gidip başka işleri yapabilir. İşlem bittiğinde, kaldığı yerden devam eder.
+
+3. Task (Geriye Değer Döndürmeyen)
+ * Geriye değer döndürmeyen (void benzeri) asenkron işlemleri temsil eder.
+ * İşlemin o anki durumunu (çalışıyor mu, bitti mi, hata mı aldı?) takip etmemizi sağlar.
+ * Not: Senkron dünyadaki void metodun asenkron dünyadaki karşılığıdır.
+
+4. Task<T> (Geriye Değer Döndüren)
+ * Geriye T tipinde bir değer döndüren asenkron işlemleri temsil eder (Örn: Task<string>, Task<User>).
+ * İşlem tamamlandığında T tipindeki sonuç elde edilir.
+
+5. void (Asenkron Dünyada)
+ * Asenkron metodlarda void kullanımı sadece ve sadece "Event Handler" (olay yöneticileri - örn: buton tıklama olayları) için önerilir.
+ * Neden kaçınılmalı? * async void ile yazılan metodlar takip edilemez (unawaited).
+ * Bu metodların içinde fırlatılan hatalar (exception) yakalanamaz ve uygulamayı çökertebilir (crash).
+ * Geriye dönecek bir Task nesnesi olmadığı için işlem durumunu kontrol edemeyiz.
+
+6. Thread (İş Parçacığı) nedir? Task ile Farkı Ne?
+ * Thread (İş Parçacığı): İşletim sistemi seviyesindeki en küçük iş birimidir. CPU üzerinde doğrudan çalışır. Ağır ve maliyetli bir yapıdır (oluşturulması ve yönetilmesi bellek tüketir).
+
+Task: Thread'lerin üzerinde çalışan, daha hafif (lightweight) bir soyutlamadır (Task Parallel Library - TPL).
+Fark: Her Task yeni bir Thread oluşturmaz. .NET arka planda bir Thread Pool (Thread Havuzu) yönetir ve Task'ları bu havuzdaki uygun thread'lere dağıtır.
+
+Neden Asenkron Programlama Kullanmalıyız?
+ * Arayüzü (UI) Kilitlememek İçin: Masaüstü (WPF, WinForms) veya Mobil (Flutter, MAUI) uygulamalarında uzun süren bir işlem (örneğin dosya indirme) yapıldığında ekranın "Yanıt Vermiyor" moduna geçmesini engeller.
+ * Yüksek Performanslı Web Uygulamaları (High Scalability): ASP.NET Core gibi web mimarilerinde her istek için bir thread ayrılır. Senkron yapıda thread veri tabanını beklerken boşta durur (bloke olur). 
+ * Asenkron yapıda ise thread veri tabanı cevabını beklemek yerine havuzuna geri döner ve başka kullanıcılara hizmet eder.
+ * I/O İşlemlerinde Maksimum Verim: Disk okuma/yazma, ağ istekleri (HTTP API) veya veri tabanı sorguları gibi donanıma bağlı (I/O Bound) işlemlerde CPU'yu boş yere meşgul etmez.
