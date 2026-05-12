@@ -1,0 +1,107 @@
+﻿@{
+    ViewData["Title"] = "TodoAggregatePriority";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<style>
+    .timeline {
+        position: relative;
+        padding-left: 30px;
+        list-style: none;
+    }
+        /* Dikey Çizgi */
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 8px;
+            bottom: 8px;
+            width: 1px;
+            background-color: #e4e6fc;
+        }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 25px;
+    }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+    /* Renkli Noktalar */
+    .timeline-badge {
+        position: absolute;
+        left: -30px;
+        top: 4px;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #6777ef; /* Varsayılan Mavi */
+    }
+    /* Öncelik durumuna göre renk varyasyonları */
+    .bg-birincil {
+        background-color: #fc544b !important;
+    }
+    /* Kırmızı */
+    .bg-ikincil {
+        background-color: #ffa426 !important;
+    }
+    /* Turuncu */
+    .bg-ucuncu {
+        background-color: #47c363 !important;
+    }
+    /* Yeşil */
+
+    .timeline-title {
+        font-weight: 600;
+        font-size: 15px;
+        color: #34395e;
+        margin-bottom: 4px;
+    }
+
+    .timeline-description {
+        font-size: 13px;
+        color: #6c757d;
+        margin-bottom: 4px;
+    }
+
+    .timeline-time {
+        font-size: 12px;
+        color: #a2a2a2;
+    }
+</style>
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title mb-4" style="color:#191d21; font-weight:700;">Updates</h4>
+
+                @if (ViewBag.results != null && ((List<string>)ViewBag.results).Any())
+                {
+                    <ul class="timeline">
+                        @foreach (var item in (List<string>)ViewBag.results)
+                        {
+                            <li class="timeline-item">
+                                <span class="timeline-badge bg-birincil"></span>
+
+                                <div class="timeline-title">Görev Detayı</div>
+
+                                <div class="timeline-description">@item</div>
+
+                                <div class="timeline-time">
+                                    <i class="mdi mdi-clock-outline"></i> Şimdi
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p class="text-muted">Birincil öncelikli görev bulunamadı.</p>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

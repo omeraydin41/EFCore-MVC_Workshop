@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "OrderListAsync2";
     Layout = "~/Views/Layout/Index.cshtml";
+    int count = 0;
 }
 <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
@@ -27,10 +28,12 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
+                                count++;
                                 <tr>
-                                    <th>@item.OrderId</th>
+                                    <th>@count</th>
                                     <td>@item.Product.ProductName</td>
                                     <td>@item.Customer.CustomerName @item.Customer.CustomerSurName</td>
+                                    <td>@item.OrderCount</td>
                                     <td>@item.UnitPrice</td>
                                     <td>@item.TotalPrice</td>
                                     <td>@item.Status</td>
