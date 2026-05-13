@@ -1,0 +1,27 @@
+﻿@model List<ToDo[]>
+@{
+    ViewData["Title"] = "TodoChunk";
+    Layout = "~/Views/Layout/Index.cshtml";
+    int count =0;
+}
+
+<h1>Chunk ile guruplanmış görevler.</h1>
+@foreach (var group in Model)
+{
+    count++;<!--COUN TEGİŞEKNİ 1. 2. GİBİ GURPLARI VEREN SAYAÇ . HER CHUNK TEKARARIDA GURUP SAYISINI VERİR.-->
+    <h5>@count. Grup</h5>
+    <div class="row">
+        @foreach (var item in group)
+        {
+            <div class="col-md-6 mb-3">
+                <div class="card"><!--kart divi her beyaz alanı temsıl eder ve beyaz alan içinde gelecek olan değerler-->
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Description</h5><!--her kart içinde açıklama gelecek -->
+                        <p class="card-text">Öncelik: @item.Priority</p><!--her kart içinde öncelik gelecek  -->
+                        <span class="badge bg-warning text-dark">Tamamlanmadı</span><!--status false olanlar geleceğinden tamamlandı yazdık -->
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
