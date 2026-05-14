@@ -1,0 +1,86 @@
+﻿===============================================================================
+                       LINQ (Language Integrated Query)
+===============================================================================
+
+1. LINQ NEDİR?
+-------------------------------------------------------------------------------
+LINQ (Dil ile Entegre Edilmiş Sorgu), .NET Framework 3.5 ile hayatımıza giren ve
+farklı veri kaynaklarından (nesne koleksiyonları, veri tabanları, XML veri
+ağaçları vb.) standart, tek tip ve güçlü tipli (strongly-typed) bir şekilde
+sorgulama yapmayı sağlayan bir .NET bileşenidir.
+
+Temel amacı, veri tabanı için SQL, XML için XQuery gibi farklı diller öğrenme
+zorunluluğunu ortadan kaldırarak; tüm veri kaynaklarına C# veya VB.NET dili
+kuralları içinde kalıp, derleme zamanı (compile-time) kontrolü desteğiyle
+erişebilmektir.
+
+
+2. LINQ'İN TEMEL BİLEŞENLERİ (MİMARİSİ)
+-------------------------------------------------------------------------------
+LINQ, sorgulanacak hedef veri kaynağına göre farklı sağlayıcılar (providers)
+kullanır. En yaygın olanları şunlardır:
+
+* LINQ to Objects:
+  Bellekteki veri yapılarını (List, Array, Dictionary vb.) sorgulamak için
+  kullanılır. IEnumerable arayüzünü temel alır.
+
+* LINQ to Entities (Entity Framework):
+  İlişkisel veri tabanlarını ORM (Object-Relational Mapping) üzerinden
+  sorgulamak için kullanılır. IQueryable arayüzünü temel alır ve yazılan LINQ
+  sorgularını arka planda hedef veri tabanının SQL diline dönüştürür.
+
+* LINQ to XML:
+  XML dokümanlarını hızlı ve esnek bir şekilde oluşturmak, değiştirmek ve
+  sorgulamak için optimize edilmiş bir bileşendir.
+
+
+3. LINQ SORGULAMA SÖZDİZİMİ (SYNTAX) TÜRLERİ
+-------------------------------------------------------------------------------
+LINQ sorguları iki farklı yöntemle yazılabilir. Her iki yöntem de arka planda
+aynı makine koduna derlenir, bu nedenle aralarında performans farkı yoktur.
+
+A) Query Syntax (Sorgu Sözdizimi)
+   SQL komutlarına benzer bir yapıya sahiptir. "from", "where", "select", 
+   "orderby" gibi anahtar kelimeler kullanılır. Okunabilirliği yüksek ve
+   deklaratif bir tarzı vardır.
+
+B) Method Syntax (Metot Sözdizimi / Lambda Expressions)
+   Metot zincirleri (Chaining) ve Lambda ifadeleri (=>) kullanılarak yazılır.
+   "Where()", "Select()", "OrderBy()" gibi genişletme metotlarını (Extension 
+   Methods) temel alır. Fonksiyonel programlama yaklaşımına uygundur ve daha
+   yaygın kullanılır.
+
+
+4. LINQ'İN SAĞLADIĞI AVANTAJLAR
+-------------------------------------------------------------------------------
+* Tek Tip Sorgulama: Verinin nerede durduğundan bağımsız olarak (SQL, RAM veya
+  XML) aynı sorgu mantığı kullanılır.
+* Derleme Zamanı Kontrolü (Compile-Time Checking): Hatalı bir sütun veya tip
+  tanımlaması yapıldığında, hata proje derlenirken yakalanır. Çalışma zamanı
+  (runtime) hataları minimuma iner.
+* IntelliSense Desteği: Kod yazarken editörün kod tamamlama özelliklerinden
+  tamamen yararlanılır.
+* Daha Temiz ve Okunabilir Kod: Klasik "foreach" veya "if" döngü bloklarıyla
+  yapılan karmaşık filtreleme ve sıralama işlemlerini tek bir satıra indirger.
+* Güvenlik: Özellikle veri tabanı sorgularında parametrik bir yapı kullandığı
+  için SQL Injection gibi güvenlik açıklarına karşı koruma sağlar.
+
+
+5. ERTELENMİŞ ÇALIŞMA (DEFERRED EXECUTION) KAVRAMI
+-------------------------------------------------------------------------------
+LINQ sorgularının en önemli çalışma prensiplerinden biri "Deferred Execution"
+yani ertelenmiş çalışmadır. 
+
+Bir LINQ sorgusu tanımlandığında, o sorgu hemen çalışıp veri kaynağına gitmez.
+Sorgu sadece bir "çalışma planı" olarak bellekte saklanır. Sorgunun gerçek
+anlamda tetiklenip veriyi getirmesi, ancak sonuçlar üzerinde bir döngü (foreach)
+başlatıldığında veya ToList(), ToArray(), Count() gibi sorguyu sonlandıran
+(eager execution) bir metot çağrıldığında gerçekleşir.
+
+
+6. ÖZET
+-------------------------------------------------------------------------------
+LINQ, .NET geliştiricileri için veriyi işlemeyi bir angarya olmaktan çıkarıp
+dilin doğal bir parçası haline getiren, kodun okunabilirliğini artıran ve 
+veri erişim katmanını standardize eden güçlü bir araçtır.
+===============================================================================
