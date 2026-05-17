@@ -1,0 +1,36 @@
+﻿@model Product //Modelimizi tanımladık ki formdan gelen verileri yakalayabilelim
+
+@{
+    ViewData["Title"] = "CreateProductWithAttach";
+    Layout = "~/Views/Layout/Index.cshtml";
+}
+
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Yeni Ürün Ekleme Sayfası</h4>
+                <form class="forms-sample" method="post">
+                    <!--fermun methodu post olarak belirlendi /BACKENDE POST TETIKLENDİĞİNDE ÇALIŞACAK YER-->
+                    <div class="form-group">
+                        <label for="exampleInputName1">Ürün Adı</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Ürün Adını Yazınız"
+                               asp-for="ProductName"><!--Bu alanın kimin için çalışacağını belirledik /MODEL KISMINDAN GELDİ-->
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Ürün Fiyatı</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Ürün Fiyatını Giriniz"
+                               asp-for="ProductPrice"><!--Bu alanın kimin için çalışacağını belirledik /MODEL KISMINDAN GELDİ-->
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputName1">Stok Sayısı</label>
+                        <input type="text" class="form-control" id="exampleInputName1" placeholder="Stok Sayısını Giriniz"
+                               asp-for="ProductStock"><!--Bu alanın kimin için çalışacağını belirledik /MODEL KISMINDAN GELDİ-->
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Ürünü Ekle</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

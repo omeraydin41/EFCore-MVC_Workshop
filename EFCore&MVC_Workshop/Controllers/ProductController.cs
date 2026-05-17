@@ -96,5 +96,49 @@ namespace EFCore_MVC_Workshop.Controllers
             //ürün tablosundan ilk 4 ürünü atlayarak sonraki 10 ürünü aldık
             return View(values);
         }
+
+
+        /*ATTACH METHODU : 
+        Update yapılacağında ama sadecec ID bılındığınde kullanılır 
+        AsnoTracking ile çekilmiş veriyi tekarar Db ile ilişkilendşrmek istendiğinde kullanılır 
+        Foregn key uzerınden ilişki kuracağın ama tum veriye ihtiyaç duyulmayan zamanlarda kullanıllır 
+        */
+
+        //UPDATE HER ALANI GUNCELLER ATTACH İLE KONTROLLU ŞEKİLDE BELİRLİ ALANLARI GUNCELLEMEYE YARAR.
+
+        public IActionResult CreateProductWithAttach()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CreateProductWithAttach(Product product)
+        {
+            var category = new Category { CategoryId = 1 };
+            _context.Categories.Attach(category);
+
+            var productValue = new Product
+            {
+                ProductName = product.ProductName,
+                ProductPrice = product.ProductPrice,
+                ProductStock = product.ProductStock,
+                Category = category
+            };
+            _context.Products.Add(productValue);
+            _context.SaveChanges();
+            return RedirectToAction("ProductList");
+        }
+        /*Count gıbı koleksıyondakı elemanların sayısını gerşye doner 
+        Ama farkı count int doner longcount ise long turunde doner ve counttan daha fazla veri donebılır */
+        public IActionResult ProductCount()
+        {
+            var values = _context.Products.LongCount();
+            var lastProduct = _context.Products.OrderBy(x=>x.ProductId).Last();
+            ViewBag.V2 = lastProduct.ProductName;
+            ViewBag.V = values;
+            return View();
+        }
+
+        //Bir dizinin son elemanını döner şart verirsen şarta uyan son elemanı getirir.ÖNCE ORDERBY YAPILMALI 
     }
 }
