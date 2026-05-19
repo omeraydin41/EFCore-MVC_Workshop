@@ -161,5 +161,48 @@ namespace EFCore_MVC_Workshop.Controllers
 
             return View(result);
         }
+
+        //DEFAULTİFEMPTY : Bir koleksiyonda hiç eleman yoksa varsayılan bir değer döndürür .KOLEKSİYON BOŞSA VARSAYILAN DEĞER DÖNDÜRMEK İÇİN KULLANILIR.
+        //Ankara şehrinde müşteri olup olmadığını kontrol eder ve eğer yoksa varsayılan bir müşteri nesnesi döndürür
+        public IActionResult CustomerListWithDefaultIfEmpty()
+        {
+            var customer = _context.Customers.
+                Where(x => x.CustomerCity == "Ankara")
+                .ToList()
+                .DefaultIfEmpty(new Customer
+                {
+                    CustomerId = 0,
+                    CustomerName = "Müşteri Bulunamadı",
+                    CustomerSurName = "_____",
+                    CustomerCity="Ankara"
+                }).ToList();
+            return View(customer);
+        }
+
+        //INTERSECT : İki koleksiyonda ortak olan elemanları döndürür .İki şehirde de aynı isim ve soyisimde müşteri varsa onları döndürür
+        //İki kumede ortak elemanları bulur ve ortak olmayanları kumeden atar 
+        public IActionResult CustomerIntersectByCity()
+        {
+            var customerValues1=_context.Customers
+                .Where(x => x.CustomerCity == "İstanbul")
+                .Select(c => c.CustomerName +" "+c.CustomerSurName)
+                .ToList();
+
+            var customerValues2=_context.Customers
+                .Where(x => x.CustomerCity == "Ankara")
+                .Select(c => c.CustomerName +" "+c.CustomerSurName)
+                .ToList();
+
+            var intersectValues = customerValues1.Intersect(customerValues2).ToList();
+            //İki koleksiyonda ortak olan elemanları döndürür .İki şehirde de aynı isim ve soyisimde müşteri varsa onları döndürür
+            return View(intersectValues);
+        }
+
+        public IActionResult CustomerCastExample()
+        {
+            var values = _context.Customers.ToList();
+            ViewBag.v=values;//Cast methodu ile verileri Customer tipine dönüştürerek liste haline getiriyoruz
+            return View();
+        }
     }
 }

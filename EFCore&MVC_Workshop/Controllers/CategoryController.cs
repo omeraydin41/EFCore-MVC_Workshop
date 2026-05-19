@@ -63,5 +63,37 @@ namespace EFCore_MVC_Workshop.Controllers
             _context.SaveChanges();//değişiklikleri kaydetme işlemi
             return RedirectToAction("CategoryList");//guncelleme işlemi tamamlandıktan sonra kategori listesine yönlendirme işlemi
         }
+
+
+        /*
+        Bir koleksiyondakı elemanların tersıne çevirir. İlk eleman sona son eleman başa geçer.
+        Bu yontem IEnumarable doner  : YANİ LİSTE DEĞİŞMEZ 
+         */
+        public IActionResult CategoryReverse()
+        {
+             /*First meyhodu bir klokesiyondak ılk elemanı doner.
+             Eğer şart verisen şarta uyan ilk elemanı doner.
+             */
+            var value =_context.Categories.First();
+            ViewBag.V = value.CategoryName;
+
+            /*
+             Singleordefault  : 
+            Koleksıyonda sadece bır tane eleman varsa o gelır yoksa geriye null doner :birden fazla varsa hata fırlatır.
+             */
+            var value2 =_context.Categories.SingleOrDefault(x=>x.CategoryName=="Anne ve Bebek Ürünleri");
+            ViewBag.V2 = value2.CategoryName;
+
+            var values = _context.Categories
+                .OrderBy(x => x.CategoryId)
+                .ToList();
+            values.Reverse();
+
+            //`List.Reverse()` metodu geriye bir değer döndürmeyip (`void`) listenin kendisini doğrudan değiştirdiği için zincirleme
+            //(tek satırda) yazılamaz ve ayrı bir satırda çağrılması gerekir.
+            return View(values);
+        }
+
+       
     }
 }
