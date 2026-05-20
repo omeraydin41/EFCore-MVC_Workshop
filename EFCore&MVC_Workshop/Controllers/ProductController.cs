@@ -1,5 +1,6 @@
 ﻿using EFCore_MVC_Workshop.Context;
 using EFCore_MVC_Workshop.Entities;
+using EFCore_MVC_Workshop.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -140,5 +141,31 @@ namespace EFCore_MVC_Workshop.Controllers
         }
 
         //Bir dizinin son elemanını döner şart verirsen şarta uyan son elemanı getirir.ÖNCE ORDERBY YAPILMALI 
+
+
+
+
+        /*Joın iki tabloyu ortak bır alana uzerınden bırşeltiremk için kullanılır.
+        Ortak bır anahtar uzerınden eşleşen verileri getırır.
+        */
+        public IActionResult ProductListWithCategories()
+        {
+            var result = 
+                         from c in _context.Categories
+                         join p in _context.Products
+                         on
+                         c.CategoryId equals p.CategoryId
+                         select new ProductWithCategoryViewModel
+                         {
+                             ProductName = p.ProductName,
+                             ProductStock = (int)p.ProductStock,
+                             CategoryName = c.CategoryName
+                         };
+            return View(result.ToList());
+        }
+
+
+
+
     }
 }

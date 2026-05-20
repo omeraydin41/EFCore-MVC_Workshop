@@ -204,5 +204,30 @@ namespace EFCore_MVC_Workshop.Controllers
             ViewBag.v=values;//Cast methodu ile verileri Customer tipine dönüştürerek liste haline getiriyoruz
             return View();
         }
+
+        //EF CORE İÇİN AYRI INDEX METHODU VARDIR 
+        /*INDEX METHODU LINQ SORGU İÇERİSİNDE :
+        LINQ içinde foreach gıbı donereken aynı anda her elamnın kaçıncı sırada olduğunu bilmek istiyorsan İNDEX kullanılır :
+        Listenınniçindekı elemanları sıralı şekilde numaralandırmak 
+        Viewde bu numaralrı gostermek için 
+        */
+        public IActionResult CustomerListWithIndex()
+        {
+            var customers = 
+                _context.Customers
+                .ToList()
+                .Select((c, index) => new
+            {
+                siraNo=index+1,//
+                c.CustomerName,
+                c.CustomerSurName,
+                c.CustomerCity
+            }).ToList();
+            return View(customers);
+        }
+
+        //EF İNDEX METHODU :tablo sutun içerisnde arama sıralama fitrelemeyı hızlı yapmaya yarar
+        //ATTACHRANGE methodu : EF de ebtitiy ı Zaten var gncellenmeyecek gibi takıp altına alamaya yarar (track etemek)
+        //add gıbı ekleme ve ya update gıbı guncellem yapmaz 
     }
 }

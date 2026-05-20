@@ -1,5 +1,6 @@
 ﻿using EFCore_MVC_Workshop.Context;
 using EFCore_MVC_Workshop.Entities;
+using EFCore_MVC_Workshop.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Build.Framework;
@@ -169,5 +170,31 @@ namespace EFCore_MVC_Workshop.Controllers
         }
 
         #endregion
+
+
+        //GROUP JOIN UYGULMASI 
+        /*Group joın  iki tabloyu joınler ama eşleşen verileri bır koleksıyon olarak geriye doner .
+          NESTED LİSTELERDE KULLANILIR  NESTED : İÇ İÇE LİSTEDİR */
+        public IActionResult OrderListWithCustomerGroup()
+        {
+            var result = from customer in _context.Customers //customer tablosunu al 
+                         join order in _context.Orders    //orders tablosunla eşitle 
+                         on customer.CustomerId equals order.CustomerId //şartı yaz
+                         into OrderGroup
+                         select new CustomerOrderWievModel
+                         {
+                             CustomerName = customer.CustomerName +" "+ customer.CustomerSurName,
+                             Orders = OrderGroup.ToList()
+                         };
+            return View(result.ToList());
+        }
+
+
+
+        /*ASQUARYBLE METHODU : 
+        Bir koleksiyounu Iquaryable arayuzune donuşturur
+        Bu koleksiyon linq sotgularını db ye uygun şekilde işleyebılır.
+        Sorgu zınciri kumak için  dinamık sorgu kurmak için kullanılır.
+        */
     }
 }

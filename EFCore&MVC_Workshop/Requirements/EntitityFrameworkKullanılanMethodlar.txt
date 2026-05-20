@@ -1,0 +1,132 @@
+﻿
+PROJE KASAMINDA KULLANILAN TÜM ENTITY FRAMEWORK METHODLAR :
+
+* ToList: Verileri liste haline çevirir.
+
+* Add: Yeni veri ekler.
+
+* Find: Belirli bir veriyi bulur.
+
+* Remove: Veriyi siler.
+
+* Update: Veriyi günceller.
+
+* Count: Veri sayısını verir.
+
+* Min: En küçük değeri bulur.
+
+* Max: En büyük değeri bulur.
+
+* Sum: Sayısal değerleri toplar.
+
+* Avg: Ortalama hesaplar.
+
+* FirstOrDefault: İlk veriyi getirir, yoksa boş döner.
+
+* SaveChanges: Yapılan değişiklikleri veritabanına kaydeder.
+
+* Select: Sadece istenilen alanları seçer.
+
+* Include: Bağlantılı verileri birlikte getirir.
+
+* Where: Şarta uygun verileri filtreler.
+
+* Take: Belirli sayıda veri alır.
+
+* Skip: Baştaki verileri atlar
+.
+* OrderByAsc: Verileri küçükten büyüğe sıralar.
+
+* OrderByDesc: Verileri büyükten küçüğe sıralar.
+
+* Any: Veri var mı kontrol eder.
+
+* All: Tüm veriler şartı sağlıyor mu kontrol eder.
+
+* Contain: İçerisinde belirli bir değer var mı bakar.
+
+* StartsWith: Verinin belirli bir ifadeyle başlayıp başlamadığını kontrol eder.
+
+* EndsWith: Verinin belirli bir ifadeyle bitip bitmediğini kontrol eder
+.
+* ToListAsync: Verileri listeye çevirme işlemini bekletmeden yapar.
+
+* AddAsync: Yeni veriyi bekletmeden ekler.
+
+* SaveChangesAsync: Değişiklikleri bekletmeden kaydeder.
+
+* FindAsync: Veriyi bekletmeden bulur.
+
+* AddRange: Birden fazla veri ekler.
+
+* AddRangeAsync: Birden fazla veriyi bekletmeden ekler.
+
+* Aggregate: Verileri tek bir sonuçta birleştirir.
+
+* Append: Listenin sonuna yeni veri ekler.
+
+* Prepend: Listenin başına yeni veri ekler.
+
+* Chunk: Verileri parçalara böler.
+
+* Concat: İki listeyi birleştirir.
+
+* Union: Tekrarsız şekilde iki listeyi birleştirir.
+
+* UnionBy: Belirli alana göre tekrarsız birleştirme yapar.
+
+* Group By: Verileri gruplar.
+
+* From: Veri kaynağını belirtir.
+
+* Distinct: Tekrarlayan verileri kaldırır.
+
+* AsParallel: İşlemleri aynı anda çalıştırarak hızlandırır.
+
+* Except: Diğer listede olmayan verileri getirir.
+
+* ExceptBy: Belirli alana göre farklı olan verileri getirir.
+
+* AllAsync: Tüm verilerin şartı sağlayıp sağlamadığını bekletmeden kontrol eder.
+
+* AnyAsync: Veri var mı kontrolünü bekletmeden yapar.
+
+* CountBy: Verileri sayarak gruplar.
+
+* AsNoTracking: Verileri takip etmeden getirerek performans sağlar.
+
+* Attach: Var olan veriyi takibe alır.
+
+* LongCount: Çok büyük veri sayılarını hesaplar.
+
+* Last: Son veriyi getirir.
+
+* SkipLast: Sondaki verileri atlar.
+
+* TakeLast: Sondan belirli sayıda veri alır.
+
+* Reverse: Verilerin sırasını ters çevirir.
+
+* First: İlk veriyi getirir.
+
+* SingleOrDefault: Tek bir veri varsa getirir, yoksa boş döner.
+
+* DefaultIfEmpty: Veri yoksa varsayılan değer döndürür.
+
+* Intersect: İki listedeki ortak verileri getirir.
+
+* Cast<T>: Verileri başka tipe dönüştürür.
+
+* OfType<T>: Sadece belirli tipteki verileri alır.
+
+* Entry: Bir verinin durum bilgisini yönetir.
+
+* Join: İki veriyi ortak alana göre birleştirir.
+
+* Group Join: Verileri grup halinde birleştirir.
+
+* Asquaryble: Veriyi sorgulanabilir hale getirir.
+
+* Index: Verinin listedeki sırasını bulur.
+
+* AttachRange: Birden fazla veriyi takibe alır.
